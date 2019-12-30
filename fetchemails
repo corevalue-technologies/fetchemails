@@ -1,0 +1,17 @@
+#!/bin/bash
+######################################################
+function grabEmails()
+{
+	who="${1}"
+    count=0
+    while [ $count>=0 ]; do
+
+    	( lynx -dump "https://www.bing.com/search?q=$who&form=QBLH&sp=-1&first=${count}1&pq=corevaluete&sc=8-11&qs=n&sk=&cvid=4CE0FC262DC74AAB806EE1B3273236C0" |  grep -oE --color '[[:alnum:]_.]+@[[:alnum:]_]+[.][[:alnum:]]+')
+    	count=$[count + 1]
+    	if [ $count -gt 50 ]; then
+          exit 1
+        fi
+    done
+}
+###################################################
+grabEmails $@
